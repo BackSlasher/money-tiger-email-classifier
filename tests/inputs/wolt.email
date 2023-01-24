@@ -1,0 +1,372 @@
+Return-Path: <nitz.raz@gmail.com>
+X-Original-To: receipts@money-tiger.tech
+Delivered-To: x23343127@pdx1-sub0-mail-mx212.dreamhost.com
+Received: from postfix-inbound-v2-7.inbound.mailchannels.net (inbound-egress-6.mailchannels.net [199.10.31.238])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by pdx1-sub0-mail-mx212.dreamhost.com (Postfix) with ESMTPS id 4Nzkyw1kBnz4pQS
+	for <receipts@money-tiger.tech>; Sat, 21 Jan 2023 10:14:16 -0800 (PST)
+Received: from inbound-trex-5 (unknown [127.0.0.6])
+	by postfix-inbound-v2-7.inbound.mailchannels.net (Postfix) with ESMTP id F069C40146
+	for <receipts@money-tiger.tech>; Sat, 21 Jan 2023 18:14:14 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1674324854; a=rsa-sha256;
+	cv=none;
+	b=Rtgn8ITNbgU59r8a1L33Mt0Rxly8vyybuR2qlBI/2BvveUwgsN/elkldjo0VUznhahoomk
+	j65N/Xsu1YaoRWY96b87MYzmwBntq5pPOc06TdMdXcH4vLQ42kjuuCvgPdYIkT8kF8JYIc
+	pbmQghcXXyjLxrD2bGAyU8bu0ffykJEZ5WxQeLRM2XKrbrIruhErNdwKTiNL+mSs35xqDH
+	Z+XrH4PbBSNQnxIfdzt2mAEofCYXZNu3UR5g9SIKTY2rXIcGHp8wIryblGGyCE8tT/XFIL
+	htfDVicAPbo5N1OvDKB0VIysg80iMSKOzSmgwCA2+5wblpfScML3l01m7K5JeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailchannels.net;
+	s=arc-2022; t=1674324854;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=hMroOdp4z8ebwepbsm6xZIJ+t6TFu2IJSyrJCRQXFAs=;
+	b=1d+Jygc7jMMzBO3Jm+PWk0uDBUi4FfMtIl1Pk+orPg1uG0AGSj670lX1aIcQ/wwGLXB3qp
+	PN1mKcn855YeP3RrLSXjSaGjLw2aDLcxJ9KsoL9ZjMZJdAFmJLj32m4YlfN/aVViQrAv0R
+	wyokKbrp3mUawA7CRL7WS740TUqSQ3KAb0l+7GPTP/FNDm8SNNvagvBerWHxX7U8IA10mr
+	iu2VY0VhR75xkX/fC0o73BztjqL/HbIvNDH/0K0jJTbm77WkJts0JP4LniY/FQjgKibZdb
+	fWVs1aqZnXeZLksDY7/AsLvQ9hCjt5wnGWbsbObxQGlU8L+xmwTTTv0gfrQ/NA==
+ARC-Authentication-Results: i=1;
+	inbound-rspamd-668899d5d6-w6f87;
+	none
+X-Message-ID: l6KfY5yRYY8cQ3LnsLb5dSTO
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+ [209.85.210.177])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256)
+	by 100.99.207.151 (trex/6.7.1);
+	Sat, 21 Jan 2023 18:14:14 +0000
+Authentication-Results: inbound.mailchannels.net;
+ spf=pass smtp.mailfrom=nitz.raz@gmail.com;
+ dkim=pass header.d=gmail.com;
+ dmarc=pass (policy=none; pct=100; status=pass);
+ arc=none
+Received-SPF: pass (dmarc-service-64c857c6d6-gr284: domain of gmail.com
+ designates 209.85.210.177 as permitted sender) client-ip=209.85.210.177;
+ envelope-from=nitz.raz@gmail.com; helo=mail-pf1-f177.google.com;
+Received: by mail-pf1-f177.google.com with SMTP id z3so6183781pfb.2
+        for <receipts@money-tiger.tech>; Sat, 21 Jan 2023 10:14:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=hMroOdp4z8ebwepbsm6xZIJ+t6TFu2IJSyrJCRQXFAs=;
+        b=AwF7mhQvAayn0Xb+VKalrQ1ZqCsHnZi2t2cfg8yHYYCj1hKZfhEOCb2j/5JIcKhOMi
+         3G0evfldHXUO7YYYS9W+dB3FoxXwT5F6ikG6WjBwUkO/4Zu0MIbKZJWwdA3ju5AlYyb2
+         NS019zPa9PL9wyiFrYxFTQYQj8i8gq7CMwdNC4LCCLbCYANr9xQ46vQrEEKFcS4u7MWM
+         R4Rom+K0pBERxvbt6prC1YPvlnNtXqAmZBdE2yQjWRgLFPN85wYN5X3p3A5i15/E9xmC
+         htwDrvlzSGnlFsNCn4o8z8u1T3LFUmQ0XWAOk3Htt2PHNyaP79KKThxWgyXUUqah9LSr
+         +ruQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hMroOdp4z8ebwepbsm6xZIJ+t6TFu2IJSyrJCRQXFAs=;
+        b=tzymD4nH9iwXkCAQqVKCNAk7gAn7zQ997TFuc9P9k9Z7Mg2hJzPhK300fjvQV8Q7OQ
+         /yxScv7v2eTrKccwmg43F2ssxqZ4kT0H06aqBeY9Dg+t2zd+zCQIG+ecKcBlpF8Cbd9V
+         OfsSf+uV8Juc2r+/HbrB1ggFvSG9Qd0a0Vf+RZ7ck3hGq3SwWMPWHuteQUKxF5yiYCFI
+         MQC6GRRMu9K0CuyYP5s86az0Rfsi8zKBLo3p6W4qfDKANQjiIIMl6bYp1QEx3HL4NQZw
+         9pcvg+mk6mOQWI03Szgv86V0dhlGCsx+yDvDCt3tmQASY4kHX7iLCGIXQgMUVlxqn0nR
+         p8aQ==
+X-Gm-Message-State: AFqh2koizwx10JwILNRuOCpYByB5QGYBTuKNCE7dyIcTvnvuPUdvefHV
+	wWlmD/wf6/YwxGVXCCZypPA0aQZz2R9RctP16WdJq1pz
+X-Google-Smtp-Source: AMrXdXtceFXdIS6RYujBxncRUio/5hKrrIklnzKvy7lBtftTVWcHIDfjAI8VxjQVEdASLddTdnbN4PiJw1BigJaz5ec=
+X-Received: by 2002:a63:161d:0:b0:491:9772:f4a6 with SMTP id
+ w29-20020a63161d000000b004919772f4a6mr1734150pgl.90.1674324851938; Sat, 21
+ Jan 2023 10:14:11 -0800 (PST)
+MIME-Version: 1.0
+References: <01020185d4c7123c-2494d674-7dba-474b-88d8-e21935cf835f-000000@eu-west-1.amazonses.com>
+In-Reply-To: <01020185d4c7123c-2494d674-7dba-474b-88d8-e21935cf835f-000000@eu-west-1.amazonses.com>
+From: Nitzan Raz <nitz.raz@gmail.com>
+Date: Sat, 21 Jan 2023 20:14:00 +0200
+Message-ID: <CAD+nROAy_q1CN6w5sWNbkX84Rh=wACWoOsjFdDz2J=pZJCHDhg@mail.gmail.com>
+Subject: Fwd: Purchase receipt
+To: receipts@money-tiger.tech
+Content-Type: multipart/mixed; boundary="00000000000009f7f105f2ca22ef"
+
+--00000000000009f7f105f2ca22ef
+Content-Type: multipart/alternative; boundary="00000000000009f7ed05f2ca22ed"
+
+--00000000000009f7ed05f2ca22ed
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+Kk5pdHphbiBSYXoqDQoNCg0KLS0tLS0tLS0tLSBGb3J3YXJkZWQgbWVzc2FnZSAtLS0tLS0tLS0N
+CkZyb206IFdvbHQgPGluZm9Ad29sdC5jb20+DQpEYXRlOiBTYXQsIEphbiAyMSwgMjAyMyBhdCA0
+OjQxIFBNDQpTdWJqZWN0OiBQdXJjaGFzZSByZWNlaXB0DQpUbzogPG5pdHoucmF6QGdtYWlsLmNv
+bT4NCg0KDQrXl9ep15HXldeg15nXqiDXntehIC8g16fXkdec15QgKNee16fXldeoKSDXnteh16TX
+qCAxMjQwNDAzMDEg16TXqNeY15kg15TXlNeW157XoNeUDQrXqdedINec16fXldeXIE5pdHphbiBS
+YXoNCtee16EnINeU15bXnteg15QgNjNjYmVmMWM3NGQ5ZTJlYzRjNzViMGQ0DQrXnten15XXnSBH
+b2xkZW4gQnVycml0byDwn4yvDQrXodeV15Ig15TXltee16DXlCDXntep15zXldeXDQrXqteQ16jX
+mdeaINeU16TXp9eUIDIxLjAxLjIwMjMgMTY6NDANCteU16LXqNeUINep15zXmSBHcm91cCBPcmRl
+ciDXkNee16bXoteZINeq16nXnNeV150NCk1hc3RlckNhcmQ6ICoqKio0NjA3IOKAjjEzNy4wMA0K
+16TXqNeZ15gg157XoiLXniAlINeb157XldeqINee15fXmdeoINeZ15fXmdeT15Qg157Xl9eZ16gN
+CteR16jXp9ek16HXmCDXkdeV16jXmdeY15Ug4oCONTkuMDANCteR16jXp9ek16HXmCDXkdeV16jX
+mdeY15UgMTclIDEg4oCONTEuMDAg4oCONTEuMDANCteq15XXodek16og15fXnNeR15XXnyDXkdeq
+16nXnNeV150/OiDXk9eSINee15jXldeS158gMTclIDEg4oCOOC4wMCDigI44LjAwDQrXqdeZ16DX
+ldeZ15nXnSAtINeR16jXp9ek16HXmDog15zXnNeQINeQ15HXlden15PXlSAxNyUgMSDigI4wLjAw
+IOKAjjAuMDANCteR15XXqNeZ15jXlSDXkdeV15wg16fXnNeQ16HXmSDigI42MC4wMA0K15HXldeo
+15nXmNeVINeR15XXnCDXp9ec15DXodeZIDE3JSAxIOKAjjU0LjAwIOKAjjU0LjAwDQrXkdeX16jX
+lSDXl9ec15HXldefOiDXqteR16nXmdecINek16jXkteZ16ogMTclIDEg4oCOMC4wMCDigI4wLjAw
+DQrXqteV16HXpNeV16og15XXqNeY15HXmdedIDog16bXs9eT16ggMTclIDEg4oCONi4wMCDigI42
+LjAwDQrXntep15zXldeXIDE3JSAxIOKAjjE4LjAwIOKAjjE4LjAwDQrXodeUItebINeR16ki15cg
+KNeb15XXnNecINee16LXtNeeKSDigI4xMzcuMDANCteh15og16DXmNeVINee16Ii154g16HXlCLX
+mw0K157XoiLXniAxNyUg4oCOMTE3LjA5IOKAjjE5LjkxIOKAjjEzNy4wMA0K16TXqNeY15kg15TX
+nteg16TXmdenOg0K15XXldeQ15zXmCDXkNeg15jXqNek16jXmdeW16Eg15nXqdeo15DXnCDXkdei
+IteeDQrXlyLXpDogNTE1ODg3MTU2DQrXnteh16TXqCDXoteV16HXpzogNTE1ODg3MTU2DQrXm9eq
+15XXkdeqOiDXqNeX15XXkSDXlNee15zXkNeb15QgOCwg16rXnCDXkNeR15nXkSA2NzIxNTA4LCDX
+mdep16jXkNecDQrXoteR15XXqCDXqNeb15nXqdeUINeROg0K15TXoNeR15nXkNeZ150g16fXnNeZ
+16TXldeo16DXmdeUINeR16Ii154NCteXItekOiA1MTQzMzI0MTANCtee16HXpNeoINei15XXoden
+OiA1MTQzMzI0MTANCteb16rXldeR16o6INeQ15HXnyDXkteR15nXqNeV15wgMTE0LCDXqtecINeQ
+15HXmdeRLCA2NDA0NjMyINeq15wg15DXkdeZ15EsIElTUg0K157Xodee15og157XnteV15fXqdeR
+DQo=
+--00000000000009f7ed05f2ca22ed
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_sig=
+nature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><b>Nitzan Raz</=
+b><br></div></div></div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
+ class=3D"gmail_attr">---------- Forwarded message ---------<br>From: <b cl=
+ass=3D"gmail_sendername" dir=3D"auto">Wolt</b> <span dir=3D"auto">&lt;<a hr=
+ef=3D"mailto:info@wolt.com">info@wolt.com</a>&gt;</span><br>Date: Sat, Jan =
+21, 2023 at 4:41 PM<br>Subject: Purchase receipt<br>To:  &lt;<a href=3D"mai=
+lto:nitz.raz@gmail.com">nitz.raz@gmail.com</a>&gt;<br></div><br><br>
+=20
+=20
+ <div style=3D"direction:rtl">
+  <div style=3D"font-family:&#39;Helvetica Neue&#39;,Helvetica,Arial,sans-s=
+erif;padding:24px;max-width:680px;margin-right:auto;margin-left:auto">
+   <h1 style=3D"font-size:16px;color:#404040;line-height:25px;margin:0;padd=
+ing:12px 0">=D7=97=D7=A9=D7=91=D7=95=D7=A0=D7=99=D7=AA =D7=9E=D7=A1 / =D7=
+=A7=D7=91=D7=9C=D7=94 (=D7=9E=D7=A7=D7=95=D7=A8) =D7=9E=D7=A1=D7=A4=D7=A8 1=
+24040301</h1>
+   <h2 style=3D"font-size:14px">=D7=A4=D7=A8=D7=98=D7=99 =D7=94=D7=94=D7=96=
+=D7=9E=D7=A0=D7=94</h2>
+   <table style=3D"border-collapse:collapse;width:100%;margin-bottom:48px;m=
+argin-bottom:20px">
+    <tbody>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=A9=D7=9D =D7=9C=D7=A7=D7=95=D7=97</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">Nitzan Raz</t=
+d>
+     </tr>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=9E=D7=A1&#39; =D7=94=D7=96=D7=9E=D7=A0=D7=94</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">63cbef1c74d9e=
+2ec4c75b0d4</td>
+     </tr>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=9E=D7=A7=D7=95=D7=9D</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">Golden Burrit=
+o =F0=9F=8C=AF</td>
+     </tr>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=A1=D7=95=D7=92 =D7=94=D7=96=D7=9E=D7=A0=D7=94</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=D7=9E=D7=A9=
+=D7=9C=D7=95=D7=97</td>
+     </tr>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=AA=D7=90=D7=A8=D7=99=D7=9A =D7=94=D7=A4=D7=A7=D7=94</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">21.01.2023 16=
+:40</td>
+     </tr>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=94=D7=A2=D7=A8=D7=94 =D7=A9=D7=9C=D7=99</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">Group Order</=
+td>
+     </tr>
+    </tbody>
+   </table>
+   <h2 style=3D"font-size:14px">=D7=90=D7=9E=D7=A6=D7=A2=D7=99 =D7=AA=D7=A9=
+=D7=9C=D7=95=D7=9D</h2>
+   <table style=3D"border-collapse:collapse;width:100%;margin-bottom:48px">
+    <tbody>
+     <tr>
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">MasterCard: ****1234</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E137.=
+00</td>
+     </tr>
+    </tbody>
+   </table>
+   <table style=3D"border-collapse:collapse;width:100%;margin-bottom:48px">
+    <tbody>
+     <tr>
+      <th style=3D"text-align:start;padding:8px;text-align:end;font-weight:=
+normal;text-align:start;padding-right:0">=D7=A4=D7=A8=D7=99=D7=98</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal">=D7=9E=D7=
+=A2&quot;=D7=9E %</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal">=D7=9B=D7=
+=9E=D7=95=D7=AA</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal">=D7=9E=D7=
+=97=D7=99=D7=A8 =D7=99=D7=97=D7=99=D7=93=D7=94</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal;padding-le=
+ft:0">=D7=9E=D7=97=D7=99=D7=A8</th>
+     </tr>
+    </tbody>
+    <tbody>
+     <tr style=3D"border-top:1px solid lightgrey">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=91=D7=A8=D7=A7=D7=A4=D7=A1=D7=98 =D7=91=D7=95=D7=A8=D7=99=D7=98=D7=
+=95</td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E59.0=
+0</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=91=D7=A8=D7=A7=D7=A4=D7=A1=D7=98 =D7=91=D7=95=
+=D7=A8=D7=99=D7=98=D7=95</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E51.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E51.0=
+0</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=AA=D7=95=D7=A1=D7=A4=D7=AA =D7=97=D7=9C=D7=91=
+=D7=95=D7=9F =D7=91=D7=AA=D7=A9=D7=9C=D7=95=D7=9D?: =D7=93=D7=92 =D7=9E=D7=
+=98=D7=95=D7=92=D7=9F</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E8.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E8.00=
+</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=A9=D7=99=D7=A0=D7=95=D7=99=D7=99=D7=9D - =D7=91=
+=D7=A8=D7=A7=D7=A4=D7=A1=D7=98: =D7=9C=D7=9C=D7=90 =D7=90=D7=91=D7=95=D7=A7=
+=D7=93=D7=95</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E0.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E0.00=
+</td>
+     </tr>
+     <tr style=3D"border-top:1px solid lightgrey">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=91=D7=95=D7=A8=D7=99=D7=98=D7=95 =D7=91=D7=95=D7=9C =D7=A7=D7=9C=
+=D7=90=D7=A1=D7=99</td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end"></td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E60.0=
+0</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=91=D7=95=D7=A8=D7=99=D7=98=D7=95 =D7=91=D7=95=
+=D7=9C =D7=A7=D7=9C=D7=90=D7=A1=D7=99</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E54.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E54.0=
+0</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=91=D7=97=D7=A8=D7=95 =D7=97=D7=9C=D7=91=D7=95=
+=D7=9F: =D7=AA=D7=91=D7=A9=D7=99=D7=9C =D7=A4=D7=A8=D7=92=D7=99=D7=AA</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E0.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E0.00=
+</td>
+     </tr>
+     <tr style=3D"color:#898989">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-right:24px">=D7=AA=D7=95=D7=A1=D7=A4=D7=95=D7=AA =D7=95=D7=A8=
+=D7=98=D7=91=D7=99=D7=9D : =D7=A6=D7=B3=D7=93=D7=A8</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E6.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E6.00=
+</td>
+     </tr>
+     <tr style=3D"border-top:1px solid lightgrey">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=9E=D7=A9=D7=9C=D7=95=D7=97</td>
+      <td style=3D"padding:8px;text-align:end">17%</td>
+      <td style=3D"padding:8px;text-align:end">1</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E18.00</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E18.0=
+0</td>
+     </tr>
+     <tr style=3D"border-top:1px solid grey;font-weight:bold">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0;padding-left:0">=D7=A1=D7=94&quot;=D7=9B =D7=91=D7=A9&quot;=D7=97 (=D7=
+=9B=D7=95=D7=9C=D7=9C =D7=9E=D7=A2=D7=B4=D7=9E)</td>
+      <td colspan=3D"2" style=3D"padding:8px;text-align:end;padding-left:0"=
+></td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0"></td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0;padding-left:0=
+">=E2=80=8E137.00</td>
+     </tr>
+    </tbody>
+   </table>
+   <table style=3D"border-collapse:collapse;width:100%;margin-bottom:48px">
+    <tbody>
+     <tr>
+      <th style=3D"text-align:start;padding:8px;text-align:end;font-weight:=
+normal;text-align:start;padding-right:0"></th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal">=D7=A1=D7=
+=9A =D7=A0=D7=98=D7=95</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal">=D7=9E=D7=
+=A2&quot;=D7=9E</th>
+      <th style=3D"padding:8px;text-align:end;font-weight:normal;padding-le=
+ft:0">=D7=A1=D7=94&quot;=D7=9B</th>
+     </tr>
+    </tbody>
+    <tbody>
+     <tr style=3D"border-top:1px solid lightgrey">
+      <td style=3D"padding:8px;text-align:end;text-align:start;padding-righ=
+t:0">=D7=9E=D7=A2&quot;=D7=9E 17%</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E117.09</td>
+      <td style=3D"padding:8px;text-align:end">=E2=80=8E19.91</td>
+      <td style=3D"padding:8px;text-align:end;padding-left:0">=E2=80=8E137.=
+00</td>
+     </tr>
+    </tbody>
+   </table>
+   <div style=3D"margin-top:24px;color:#898989;font-size:14px"><span style=
+=3D"font-weight:bold"> =D7=A4=D7=A8=D7=98=D7=99 =D7=94=D7=9E=D7=A0=D7=A4=D7=
+=99=D7=A7:<br> </span> =D7=95=D7=95=D7=90=D7=9C=D7=98 =D7=90=D7=A0=D7=98=D7=
+=A8=D7=A4=D7=A8=D7=99=D7=96=D7=A1 =D7=99=D7=A9=D7=A8=D7=90=D7=9C =D7=91=D7=
+=A2&quot;=D7=9E<br> =D7=97&quot;=D7=A4: 515887156<br> =D7=9E=D7=A1=D7=A4=D7=
+=A8 =D7=A2=D7=95=D7=A1=D7=A7: 515887156<br> =D7=9B=D7=AA=D7=95=D7=91=D7=AA:=
+ =D7=A8=D7=97=D7=95=D7=91 =D7=94=D7=9E=D7=9C=D7=90=D7=9B=D7=94 8, =D7=AA=D7=
+=9C =D7=90=D7=91=D7=99=D7=91 6721508, =D7=99=D7=A9=D7=A8=D7=90=D7=9C<br>
+   </div>
+   <div style=3D"margin-top:24px;color:#898989;font-size:14px"><span style=
+=3D"font-weight:bold"> =D7=A2=D7=91=D7=95=D7=A8 =D7=A8=D7=9B=D7=99=D7=A9=D7=
+=94 =D7=91:<br> </span> =D7=94=D7=A0=D7=91=D7=99=D7=90=D7=99=D7=9D =D7=A7=
+=D7=9C=D7=99=D7=A4=D7=95=D7=A8=D7=A0=D7=99=D7=94 =D7=91=D7=A2&quot;=D7=9E<b=
+r> =D7=97&quot;=D7=A4: 514332410<br> =D7=9E=D7=A1=D7=A4=D7=A8 =D7=A2=D7=95=
+=D7=A1=D7=A7: 514332410<br> =D7=9B=D7=AA=D7=95=D7=91=D7=AA: =D7=90=D7=91=D7=
+=9F =D7=92=D7=91=D7=99=D7=A8=D7=95=D7=9C 114, =D7=AA=D7=9C =D7=90=D7=91=D7=
+=99=D7=91, 6404632 =D7=AA=D7=9C =D7=90=D7=91=D7=99=D7=91, ISR<br>
+   </div>
+   <div style=3D"margin-top:24px;color:#898989;font-size:14px"><span style=
+=3D"font-weight:bold">=D7=9E=D7=A1=D7=9E=D7=9A =D7=9E=D7=9E=D7=95=D7=97=D7=
+=A9=D7=91</span>
+   </div>
+  </div>
+ <img alt=3D"" src=3D"https://p1wibfgd.r.eu-west-1.awstrack.me/I0/01020185d=
+4c7123c-2494d674-7dba-474b-88d8-e21935cf835f-000000/ckKGzLH-p6q95W3DBaONsor=
+4jJ0=3D305" style=3D"display:none;width:1px;height:1px">
+</div>
+</div></div>
+
+--00000000000009f7ed05f2ca22ed--

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "money_tiger_email_classifier"
+description = "Classifies reciept emails into what reciept they are of"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["email"]
+license = {text = "All rights reserved"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = [
+]
+
+dynamic = ["version"]
+
+
+[project.optional-dependencies]
+tests = [
+]
+
