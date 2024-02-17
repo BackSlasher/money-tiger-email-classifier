@@ -24,3 +24,5 @@ dependencies = [
 tests = [
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["email_classifier"]
